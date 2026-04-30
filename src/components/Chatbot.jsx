@@ -8,7 +8,7 @@ const RESPONSES = {
   projects: "She has built many robust applications! Some highlights include an AI-powered Health Consultation app, a Job Search AI, and enterprise platforms like KAH and ATLAS. You can view her open-source work by clicking 'Open Source' in the navigation.",
   skills: "Her core stack includes Python, Node.js, TypeScript, React, and AWS. She's also highly experienced with AI integrations (LLMs, LangChain), Docker, Kubernetes, and database design.",
   contact: "You can reach her via email or LinkedIn using the links in the Contact section at the bottom of the page! She's always open to discussing new opportunities.",
-  default: "Hi! I'm Urjashee's AI assistant. I don't have an LLM brain yet, but I can answer questions about her experience, projects, skills, or how to contact her. What would you like to know?"
+  default: "Hi! I'm Urjashee's AI assistant. I'm powered by an LLM and can answer any questions about her professional experience, technical skills, or recent projects. How can I help you today?"
 };
 
 export function Chatbot() {
@@ -17,6 +17,7 @@ export function Chatbot() {
     { role: "bot", text: RESPONSES.default }
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -27,33 +28,44 @@ export function Chatbot() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage = { role: "user", text: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    setIsLoading(true);
 
-    // Simulate thinking delay
-    setTimeout(() => {
-      const lowerInput = userMessage.text.toLowerCase();
-      let botResponse = RESPONSES.default;
+    try {
+      const chatHistory = messages
+        .filter(m => m.role !== "system") // Just in case
+        .map(m => ({
+          role: m.role === "bot" ? "assistant" : "user",
+          content: m.text
+        }));
 
-      if (lowerInput.includes("experience") || lowerInput.includes("work") || lowerInput.includes("job")) {
-        botResponse = RESPONSES.experience;
-      } else if (lowerInput.includes("project") || lowerInput.includes("github") || lowerInput.includes("build")) {
-        botResponse = RESPONSES.projects;
-      } else if (lowerInput.includes("skill") || lowerInput.includes("tech") || lowerInput.includes("stack")) {
-        botResponse = RESPONSES.skills;
-      } else if (lowerInput.includes("contact") || lowerInput.includes("hire") || lowerInput.includes("email")) {
-        botResponse = RESPONSES.contact;
-      } else if (lowerInput.includes("hi") || lowerInput.includes("hello")) {
-        botResponse = "Hello! Ask me about Urjashee's skills, projects, or experience.";
-      }
+      chatHistory.push({ role: "user", content: input });
 
-      setMessages((prev) => [...prev, { role: "bot", text: botResponse }]);
-    }, 600);
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages: chatHistory }),
+      });
+
+      const data = await response.json();
+      
+      if (data.error) throw new Error(data.error);
+
+      setMessages((prev) => [...prev, { role: "bot", text: data.text }]);
+    } catch (error) {
+      console.error("Chat Error:", error);
+      setMessages((prev) => [...prev, { role: "bot", text: "Sorry, I'm having trouble connecting right now. Please try again later!" }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -126,6 +138,27 @@ export function Chatbot() {
                   </div>
                 </div>
               ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-white/10 text-foreground rounded-2xl rounded-tl-sm border border-white/5 p-3 text-sm flex gap-1">
+                    <motion.span
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+                      className="w-1.5 h-1.5 rounded-full bg-primary"
+                    />
+                    <motion.span
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                      className="w-1.5 h-1.5 rounded-full bg-primary"
+                    />
+                    <motion.span
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+                      className="w-1.5 h-1.5 rounded-full bg-primary"
+                    />
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
 
