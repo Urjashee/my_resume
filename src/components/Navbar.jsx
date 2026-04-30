@@ -7,14 +7,14 @@ export function Navbar() {
 
   return (
     <div className="fixed top-0 inset-x-0 z-50 flex justify-center mt-4 px-4 pointer-events-none">
-      <nav className="pointer-events-auto flex h-14 w-full max-w-screen-md items-center px-6 rounded-full glass">
-        <div className="flex items-center space-x-4 flex-1">
-          <Link className="font-bold tracking-tight text-lg text-primary" to="/">
+      <nav className="pointer-events-auto flex h-14 w-full max-w-screen-md items-center px-3 sm:px-6 rounded-full glass">
+        <div className="flex items-center space-x-2 sm:space-x-4 flex-1">
+          <Link className="font-bold tracking-tight text-base sm:text-lg text-primary" to="/">
             US.
           </Link>
         </div>
         
-        <div className="flex items-center space-x-6 text-sm font-medium">
+        <div className="flex items-center space-x-3 sm:space-x-6 text-xs sm:text-sm font-medium">
           {isHome ? (
             <>
               <a className="transition-colors hover:text-primary text-foreground/80" href="#experience">Experience</a>
