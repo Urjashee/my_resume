@@ -1,4 +1,6 @@
 import OpenAI from 'openai';
+import fs from 'fs';
+import path from 'path';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -11,38 +13,60 @@ export default async function handler(req, res) {
 
   try {
     const { messages } = req.body;
+    const lastUserMessage = messages[messages.length - 1].content.toLowerCase();
+
+    // Load knowledge base
+    const bioPath = path.join(process.cwd(), 'src/data/bio.json');
+    const bioData = JSON.parse(fs.readFileSync(bioPath, 'utf8'));
+
+    // Simple RAG logic: Filter knowledge base for relevant context
+    // This demonstrates a lightweight retrieval mechanism
+    let relevantContext = "";
+    
+    // Check for project-specific queries
+    const relevantProjects = bioData.projects.filter(p => 
+      lastUserMessage.includes(p.name.toLowerCase()) || 
+      p.tech_stack.some(t => lastUserMessage.includes(t.toLowerCase())) ||
+      lastUserMessage.includes(p.id) ||
+      (p.technical_details && lastUserMessage.includes(p.technical_details.toLowerCase().split(' ')[0]))
+    );
+
+    if (relevantProjects.length > 0) {
+      relevantContext = "\n[CONTEXT: SPECIFIC PROJECTS FOUND]\n" + relevantProjects.map(p => 
+        `Project: ${p.name}
+         Role: Technical Lead / Senior Engineer
+         Tech: ${p.tech_stack.join(', ')}
+         Challenge: ${p.challenges}
+         Solution: ${p.solutions}
+         Details: ${p.technical_details}`
+      ).join('\n\n');
+    } else {
+      // General career context
+      relevantContext = `\n[CONTEXT: GENERAL PROFILE]\n${bioData.personal_info.summary}
+      Skills: ${bioData.skills.languages.join(', ')}, ${bioData.skills.frameworks.join(', ')}
+      Infrastructure: ${bioData.skills.infrastructure.join(', ')}`;
+    }
 
     const systemPrompt = {
       role: 'system',
-      content: `You are an AI assistant for Urjashee Shaw's personal portfolio website. 
-      Your goal is to answer questions about Urjashee's professional background, skills, and projects in a helpful, professional, and friendly manner.
-
-      About Urjashee Shaw:
-      - Senior AI & Full Stack Engineer with over 12 years of experience.
-      - Currently a Senior AI & Full Stack Engineer at Simpalm (since Nov 2021).
-      - Founder and former Managing Director/Technical Lead of Northeast Software Technologies (2019-2021).
-      - Core expertise: Python, LangChain, Node.js, AWS, React, TypeScript, Docker, and AI architectures.
-      - Education: Has a background in Computer Science and has even served as a Lecturer at Assam Engineering Institute.
+      content: `You are a high-end AI assistant for Urjashee Shaw's personal portfolio. 
+      You have access to a structured knowledge base about her 12+ years of experience.
       
-      Key Projects:
-      - KAH (Kids After Hours): ERP for childcare enrollment (Python, Django, React, AWS).
-      - ATLAS: ERP for relocating human trafficking victims (Python, Django, React, Docker).
-      - CASSA (Family Defender): App for family planning (Node.js, Express, TypeScript, AWS).
-      - Sawing High Climbers: Tree service operations management system (Laravel, React).
-      - Instant Security: Gig-economy platform for security guards.
-      - Gym Drop: Flexible gym pass platform.
-
-      Style Guidelines:
-      - Be concise but informative.
-      - If asked about something not related to Urjashee's career or the portfolio, politely steer the conversation back to her professional profile.
-      - Use a helpful and slightly enthusiastic tone.
-      - Keep responses short enough for a chat bubble (2-4 sentences usually).`
+      Current Profile Context:
+      ${relevantContext}
+      
+      Instructions:
+      - Use the provided context to answer accurately.
+      - If asked about specific technologies, mention her experience with them in projects like ${bioData.projects.slice(0,2).map(p => p.name).join(' or ')}.
+      - Keep responses professional, helpful, and concise (under 4 sentences).
+      - If a user asks something completely unrelated to Urjashee, politely guide them back to her professional work.`
     };
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [systemPrompt, ...messages],
-      max_tokens: 300,
+      max_tokens: 400,
+      temperature: 0.7,
     });
 
     const botMessage = completion.choices[0].message.content;
