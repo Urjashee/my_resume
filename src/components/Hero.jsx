@@ -17,14 +17,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-4xl"
         >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="mb-4 inline-block rounded-full bg-white/5 px-4 py-1.5 backdrop-blur-md border border-white/10"
-          >
-            <span className="text-sm font-medium tracking-wide text-primary">Available for new opportunities</span>
-          </motion.div>
+
           
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
             Hi, I'm <br className="sm:hidden" />

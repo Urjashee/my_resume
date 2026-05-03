@@ -9,6 +9,16 @@
   },
   "projects": [
     {
+      "id": "langgraph_researcher",
+      "name": "Agentic Research Orchestrator",
+      "description": "A multi-agent system that autonomously researches topics and critiques its findings.",
+      "technical_details": "Implemented using LangGraph's StateGraph to manage a cyclic workflow between a Researcher, a Critic, and a Writer. Utilizes persistence for long-running state management and conditional edges for autonomous decision making.",
+      "challenges": "Managing state consistency across cyclic nodes and preventing infinite loops in agent reasoning.",
+      "solutions": "Defined strict validation schemas and recursion limits within the StateGraph. Implemented a checkpointing system for full state persistence and recovery.",
+      "tech_stack": ["LangGraph", "Python", "OpenAI", "StateGraph", "Tavily", "Docker"]
+    },
+
+    {
       "id": "kah",
       "name": "KAH (Kids After Hours)",
       "link": "https://kidsafterhours.com/",

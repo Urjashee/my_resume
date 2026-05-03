@@ -29,7 +29,6 @@ export function Contact() {
               Let's build something <span className="text-gradient">amazing</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-medium">
-              I'm currently open to new opportunities, including relocation to the EU/Australia (visa sponsorship required). 
               Whether you have a question or just want to say hi, my inbox is always open.
             </p>
             

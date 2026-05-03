@@ -3,9 +3,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Badge } from "@/components/ui/badge"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Sparkles, X, BrainCircuit, Activity } from "lucide-react"
+import { Sparkles, X, BrainCircuit, Activity, Network } from "lucide-react"
+import { GraphVisualizer } from "./GraphVisualizer"
+
 
 const projects = [
+  {
+    id: "langgraph_researcher",
+    name: "Agentic Research Orchestrator",
+    description: "A multi-agent system built with LangGraph that autonomously researches topics, critiques its own findings, and iterates until high-quality reports are produced.",
+    tech: ["LangGraph", "Python", "OpenAI", "StateGraph", "Tavily"],
+    isNew: true
+  },
+
   {
     id: "kah",
     name: "KAH (Kids After Hours)",
@@ -101,7 +111,13 @@ export function Projects() {
               <Card className="glass-card flex flex-col h-full border-white/10 overflow-hidden group relative">
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
-                    <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                    <div className="flex flex-col gap-2">
+                      {project.isNew && (
+                        <Badge variant="outline" className="w-fit bg-primary/20 text-primary border-primary/50 animate-pulse">
+                          Featured AI Skill
+                        </Badge>
+                      )}
+                      <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
                       {project.link ? (
                         <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2">
                           {project.name}
@@ -112,7 +128,8 @@ export function Projects() {
                       ) : (
                         project.name
                       )}
-                    </CardTitle>
+                      </CardTitle>
+                    </div>
                     <Button 
                       variant="ghost" 
                       size="icon" 
@@ -206,9 +223,15 @@ export function Projects() {
                     animate={{ opacity: 1 }}
                     className="prose prose-invert max-w-none"
                   >
-                    <div className="whitespace-pre-wrap text-foreground/90 leading-relaxed text-lg">
+                    <div className="whitespace-pre-wrap text-foreground/90 leading-relaxed text-lg mb-8">
                       {aiExplanation}
                     </div>
+                    {selectedProject.id === "langgraph_researcher" && (
+                      <div className="mt-8">
+                        <GraphVisualizer />
+                      </div>
+                    )}
+
                   </motion.div>
                 )}
               </div>

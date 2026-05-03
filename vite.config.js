@@ -77,10 +77,68 @@ export default defineConfig(({ mode }) => {
               })
               return
             }
+            if (req.url === '/api/explain' && req.method === 'POST') {
+              let body = ''
+              req.on('data', chunk => body += chunk)
+              req.on('end', async () => {
+                try {
+                  const { projectId } = JSON.parse(body)
+                  
+                  // Load knowledge base
+                  const bioPath = path.join(process.cwd(), 'src/data/bio.json')
+                  const bioData = JSON.parse(fs.readFileSync(bioPath, 'utf8'))
+                  const project = bioData.projects.find(p => p.id === projectId)
+
+                  if (!project) {
+                    res.statusCode = 404
+                    res.end(JSON.stringify({ error: 'Project not found' }))
+                    return
+                  }
+
+                  const openai = new OpenAI({ apiKey: apiKey })
+                  const completion = await openai.chat.completions.create({
+                    model: 'gpt-3.5-turbo',
+                    messages: [
+                      {
+                        role: 'system',
+                        content: `You are an AI Technical Architect explaining a project built by Urjashee Shaw. 
+                        Your goal is to provide a deep technical "insider" look at the project's architecture, challenges, and solutions.
+                        Format the response in 3 short sections:
+                        1. **Architecture & Logic**
+                        2. **The Big Challenge**
+                        3. **Strategic Solution**
+                        Keep the total response under 200 words.`
+                      },
+                      {
+                        role: 'user',
+                        content: `Explain this project:
+                        Name: ${project.name}
+                        Tech Stack: ${project.tech_stack.join(', ')}
+                        Description: ${project.description}
+                        Technical Details: ${project.technical_details}
+                        Challenges: ${project.challenges}
+                        Solutions: ${project.solutions}`
+                      }
+                    ],
+                    max_tokens: 400,
+                    temperature: 0.7,
+                  })
+
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ text: completion.choices[0].message.content }))
+                } catch (error) {
+                  console.error('Vite Middleware Explain Error:', error)
+                  res.statusCode = 500
+                  res.end(JSON.stringify({ error: 'Failed to generate response' }))
+                }
+              })
+              return
+            }
             next()
           })
         }
       }
+
     ],
     resolve: {
       alias: {
