@@ -15,7 +15,14 @@ const projects = [
     tech: ["LangGraph", "Python", "OpenAI", "StateGraph", "Tavily"],
     isNew: true
   },
-
+  {
+    id: "langgraph_advanced_rag",
+    name: "Advanced RAG",
+    link: "https://github.com/Urjashee/advanced_rag",
+    description: "Cyclic RAG system using **LangGraph + OpenAI GPT-4o + ChromaDB** — runs fully locally, no cloud needed.",
+    tech: ["LangGraph", "Python", "OpenAI", "StateGraph"],
+    isNew: true
+  },
   {
     id: "kah",
     name: "KAH (Kids After Hours)",
@@ -68,7 +75,7 @@ export function Projects() {
     setSelectedProject(project)
     setAiExplanation("")
     setIsLoading(true)
-    
+
     try {
       const response = await fetch("/api/explain", {
         method: "POST",
@@ -118,21 +125,21 @@ export function Projects() {
                         </Badge>
                       )}
                       <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                      {project.link ? (
-                        <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2">
-                          {project.name}
-                          <svg className="w-5 h-5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      ) : (
-                        project.name
-                      )}
+                        {project.link ? (
+                          <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2">
+                            {project.name}
+                            <svg className="w-5 h-5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        ) : (
+                          project.name
+                        )}
                       </CardTitle>
                     </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
+                    <Button
+                      variant="ghost"
+                      size="icon"
                       onClick={() => handleExplain(project)}
                       className="rounded-full hover:bg-primary/20 text-primary transition-all duration-300 hover:scale-110"
                       title="AI Architecture Insights"
@@ -187,7 +194,7 @@ export function Projects() {
                     </p>
                   </div>
                 </div>
-                <button 
+                <button
                   onClick={() => setSelectedProject(null)}
                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
                 >
@@ -218,7 +225,7 @@ export function Projects() {
                     <p className="text-muted-foreground animate-pulse">Analyzing architecture...</p>
                   </div>
                 ) : (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="prose prose-invert max-w-none"
