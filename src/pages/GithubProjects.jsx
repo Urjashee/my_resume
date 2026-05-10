@@ -3,6 +3,12 @@ import { ExternalLink, GitBranch, Code2 } from "lucide-react"
 
 const projects = [
   {
+    name: "advanced_rag",
+    description: "Cyclic RAG system using LangGraph + OpenAI GPT-4o + ChromaDB — runs fully locally, no cloud needed.",
+    language: "Python",
+    url: "https://github.com/Urjashee/advanced_rag",
+  },
+  {
     name: "agentic-ai",
     description: "Jupyter Notebook implementation for agentic AI architectures.",
     language: "Jupyter Notebook",
@@ -37,12 +43,6 @@ const projects = [
     description: "Digital twin implementation and simulation models.",
     language: "Python",
     url: "https://github.com/Urjashee/digital-twin"
-  },
-  {
-    name: "django-begginers",
-    description: "Beginner-friendly Django projects and tutorials.",
-    language: "Python",
-    url: "https://github.com/Urjashee/django-begginers"
   },
   {
     name: "django-pydantic",

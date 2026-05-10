@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const RESPONSES = {
   experience: "Urjashee is a Senior AI & Full Stack Engineer with over 12 years of experience. She has worked as a Technical Lead at Simpalm and founded Northeast Software Technologies. She specializes in Python, Node.js, AWS, and AI architectures.",
-  projects: "She has built many robust applications! Some highlights include an AI-powered Health Consultation app, a Job Search AI, and enterprise platforms like KAH and ATLAS. You can view her open-source work by clicking 'Open Source' in the navigation.",
+  projects: "She has built many robust applications! Some highlights include a Job Intelligence MCP using Agentic RAG, an Agentic Research Orchestrator, and enterprise platforms like KAH and ATLAS. You can view her open-source work by clicking 'Open Source' in the navigation.",
   skills: "Her core stack includes Python, Node.js, TypeScript, React, and AWS. She's also highly experienced with AI integrations (LLMs, LangChain), Docker, Kubernetes, and database design.",
   contact: "You can reach her via email or LinkedIn using the links in the Contact section at the bottom of the page! She's always open to discussing new opportunities.",
   default: "Hi! I'm Urjashee's AI assistant. I'm powered by an LLM and can answer any questions about her professional experience, technical skills, or recent projects. How can I help you today?"

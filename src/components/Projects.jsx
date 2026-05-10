@@ -9,6 +9,14 @@ import { GraphVisualizer } from "./GraphVisualizer"
 
 const projects = [
   {
+    id: "job_search_mcp",
+    name: "Job Intelligence MCP + Agentic RAG",
+    link: "https://github.com/Urjashee/job_search_mcp",
+    description: "Multi-agent job search and analysis platform using Model Context Protocol (MCP) and Agentic RAG.",
+    tech: ["MCP", "Python", "React 19", "Qdrant", "OpenAI"],
+    isNew: true
+  },
+  {
     id: "langgraph_researcher",
     name: "Agentic Research Orchestrator",
     description: "A multi-agent system built with LangGraph that autonomously researches topics, critiques its own findings, and iterates until high-quality reports are produced.",
@@ -20,7 +28,7 @@ const projects = [
     name: "Advanced RAG",
     link: "https://github.com/Urjashee/advanced_rag",
     description: "Cyclic RAG system using **LangGraph + OpenAI GPT-4o + ChromaDB** — runs fully locally, no cloud needed.",
-    tech: ["LangGraph", "Python", "OpenAI", "StateGraph"],
+    tech: ["LangGraph", "Python", "OpenAI", "ChromaDB", "LangChain"],
     isNew: true
   },
   {

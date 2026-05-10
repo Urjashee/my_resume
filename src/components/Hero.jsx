@@ -30,7 +30,7 @@ export function Hero() {
           
           <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
             I build intelligent, scalable AI architectures and high-performance applications. 
-            With 12+ years of experience, I specialize in agentic AI systems, LLM integrations, and robust cloud infrastructure using Python, Node.js, and AWS.
+            With 12+ years of experience, I specialize in agentic AI systems (MCP, LangGraph), LLM integrations, and robust cloud infrastructure using Python, Node.js, and AWS.
           </p>
           
           <motion.div 
