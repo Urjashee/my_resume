@@ -63,10 +63,22 @@ const projects = [
     url: "https://github.com/Urjashee/instant-security-backend"
   },
   {
+    name: "insurance_policy_agent",
+    description: "LangGraph-backed compliance assistant that extracts policy metadata, scans for coverage risks, checks claim readiness, and runs side-by-side policy comparisons.",
+    language: "Python",
+    url: "https://github.com/Urjashee/insurance_policy_agent"
+  },
+  {
     name: "job-search-ai",
     description: "AI-powered job search application.",
     language: "Python",
     url: "https://github.com/Urjashee/job-search-ai",
+  },
+  {
+    name: "job_search_mcp",
+    description: "Multi-agent job search and analysis platform using Model Context Protocol (MCP) and Agentic RAG.",
+    language: "Python",
+    url: "https://github.com/Urjashee/job_search_mcp"
   },
   {
     name: "langchain-python-agent",
@@ -79,6 +91,24 @@ const projects = [
     description: "Lifting Diary course project built with modern web technologies.",
     language: "TypeScript",
     url: "https://github.com/Urjashee/liftingdiarycourse"
+  },
+  {
+    name: "llama-medical-chatbot",
+    description: "Medical chatbot implementation using LLaMA 2 model.",
+    language: "Jupyter Notebook",
+    url: "https://github.com/Urjashee/llama-medical-chatbot"
+  },
+  {
+    name: "llm-documentation-helper",
+    description: "Document helper application to query and retrieve information from LangChain documentation using LLMs.",
+    language: "Python",
+    url: "https://github.com/Urjashee/llm-documentation-helper"
+  },
+  {
+    name: "mcq_generator",
+    description: "Multiple Choice Question (MCQ) generator built using LangChain and OpenAI.",
+    language: "Jupyter Notebook",
+    url: "https://github.com/Urjashee/mcq_generator"
   }
 ];
 
@@ -126,7 +156,7 @@ export function GithubProjects() {
                   </a>
                 </div>
 
-                <h3 className="text-xl font-bold mb-2 relative z-10 text-white">{project.name}</h3>
+                <h3 className="text-xl font-bold mb-2 relative z-10 text-foreground">{project.name}</h3>
                 <p className="text-muted-foreground mb-6 flex-grow relative z-10">{project.description}</p>
 
                 <div className="flex items-center gap-2 text-sm text-muted-foreground relative z-10 mt-auto pt-4 border-t border-white/10">

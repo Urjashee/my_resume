@@ -9,6 +9,14 @@ import { GraphVisualizer } from "./GraphVisualizer"
 
 const projects = [
   {
+    id: "insurance_policy_agent",
+    name: "Insurance Policy Agent",
+    link: "https://github.com/Urjashee/insurance_policy_agent",
+    description: "A premium, LangGraph-backed compliance assistant that extracts policy metadata, scans for coverage risks, checks claim readiness, and runs side-by-side policy comparisons.",
+    tech: ["LangGraph", "Python", "OpenAI", "PostgreSQL", "pgvector", "Streamlit"],
+    isNew: true
+  },
+  {
     id: "job_search_mcp",
     name: "Job Intelligence MCP + Agentic RAG",
     link: "https://github.com/Urjashee/job_search_mcp",
