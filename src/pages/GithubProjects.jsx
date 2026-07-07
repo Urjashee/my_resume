@@ -51,6 +51,12 @@ const projects = [
     url: "https://github.com/Urjashee/django-pydantic"
   },
   {
+    name: "finance-agent",
+    description: "A source-grounded stock research copilot designed for retail investors and market analysts. Integrates FastAPI, LangGraph, and Streamlit with Yahoo Finance.",
+    language: "Python",
+    url: "https://github.com/Urjashee/finance-agent",
+  },
+  {
     name: "health-consultation",
     description: "AI application to consult about your health.",
     language: "TypeScript",

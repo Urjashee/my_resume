@@ -6,7 +6,7 @@ const experiences = [
     title: "Senior AI & Full Stack Engineer",
     company: "Simpalm",
     period: "Nov 2021 – Present",
-    description: "Architected AI-driven enterprise applications using Python, LangChain, and Node.js. Designed intelligent microservices and integrated LLMs on AWS infrastructure. Built high-volume REST APIs for AI agents. Led a team via code reviews, mentoring, and agile delivery.",
+    description: "Architected AI-driven enterprise applications using Python, LangGraph, LangChain, and Node.js. Designed intelligent microservices and integrated LLMs on AWS infrastructure. Built high-volume REST APIs for AI agents. Led a team via code reviews, mentoring, and agile delivery.",
   },
   {
     title: "Managing Director & Technical Lead",

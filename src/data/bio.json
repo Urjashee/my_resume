@@ -9,6 +9,23 @@
   },
   "projects": [
     {
+      "id": "finance_agent",
+      "name": "Stock Research Copilot",
+      "link": "https://github.com/Urjashee/finance-agent",
+      "description": "A source-grounded stock research copilot designed for retail investors and market analysts. Integrates FastAPI, LangGraph, and Streamlit with Yahoo Finance to build a structured research workflow.",
+      "technical_details": "Developed a structured financial research assistant using LangGraph to orchestrate prompt chaining and routing. The application coordinates Yahoo Finance tool layers to pull profile data, valuations, pricing, and news, presenting it in a Streamlit dashboard.",
+      "challenges": "Ensuring deterministic routing of user query intent and handling API limits/data formatting from third-party finance tools.",
+      "solutions": "Implemented validation gates and compliance checking within the LangGraph StateGraph, with standardized helper layers for Yahoo Finance integrations.",
+      "tech_stack": [
+        "LangGraph",
+        "Python",
+        "FastAPI",
+        "Streamlit",
+        "Yahoo Finance",
+        "uv"
+      ]
+    },
+    {
       "id": "insurance_policy_agent",
       "name": "Insurance Policy Agent",
       "link": "https://github.com/Urjashee/insurance_policy_agent",

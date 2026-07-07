@@ -9,6 +9,14 @@ import { GraphVisualizer } from "./GraphVisualizer"
 
 const projects = [
   {
+    id: "finance_agent",
+    name: "Stock Research Copilot",
+    link: "https://github.com/Urjashee/finance-agent",
+    description: "A source-grounded stock research copilot designed for retail investors and market analysts. Integrates FastAPI, LangGraph, and Streamlit with Yahoo Finance to build a structured research workflow.",
+    tech: ["LangGraph", "Python", "FastAPI", "Streamlit", "Yahoo Finance"],
+    isNew: true
+  },
+  {
     id: "insurance_policy_agent",
     name: "Insurance Policy Agent",
     link: "https://github.com/Urjashee/insurance_policy_agent",
