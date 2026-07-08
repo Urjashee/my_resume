@@ -49,7 +49,7 @@ export function Experience() {
         
         <div className="max-w-4xl mx-auto relative">
           {/* Vertical Timeline Line */}
-          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-purple-500/50 to-transparent sm:-translate-x-1/2"></div>
+          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-[hsl(var(--gradient-via)/0.5)] to-transparent sm:-translate-x-1/2"></div>
           
           <div className="space-y-12">
             {experiences.map((exp, i) => (
@@ -64,7 +64,10 @@ export function Experience() {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(124,58,237,0.8)] transform -translate-x-[7px] sm:-translate-x-1/2 mt-6 sm:mt-0 z-10 border-2 border-background"></div>
+                <div 
+                  className="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full bg-primary transform -translate-x-[7px] sm:-translate-x-1/2 mt-6 sm:mt-0 z-10 border-2 border-background"
+                  style={{ boxShadow: 'var(--primary-glow)' }}
+                ></div>
                 
                 {/* Content Side */}
                 <div className={`w-full sm:w-1/2 pl-12 sm:pl-0 ${

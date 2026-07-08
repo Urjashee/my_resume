@@ -6,9 +6,9 @@ export function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
       {/* Animated Background Blobs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-      <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-purple-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '2s' }}></div>
-      <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-blue-500/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '4s' }}></div>
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ backgroundColor: 'hsl(var(--blob-1) / 0.3)' }}></div>
+      <div className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ backgroundColor: 'hsl(var(--blob-2) / 0.3)', animationDelay: '2s' }}></div>
+      <div className="absolute bottom-1/4 left-1/2 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ backgroundColor: 'hsl(var(--blob-3) / 0.3)', animationDelay: '4s' }}></div>
 
       <div className="container relative z-10 mx-auto px-4 flex flex-col items-center text-center">
         <motion.div
@@ -39,7 +39,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            <Button size="lg" className="rounded-full px-8 h-14 text-lg bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all hover:shadow-[0_0_30px_rgba(124,58,237,0.6)]" asChild>
+            <Button size="lg" className="rounded-full px-8 h-14 text-lg bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02]" style={{ boxShadow: 'var(--primary-glow)' }} asChild>
               <a href="/urjashee_shaw_resume.pdf" download="Urjashee_Shaw_Resume.pdf" className="flex flex-row items-center justify-center gap-2 whitespace-nowrap">
                 <Download className="w-5 h-5" />
                 <span>Download Resume</span>

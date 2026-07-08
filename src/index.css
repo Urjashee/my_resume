@@ -26,6 +26,14 @@
     --input: 240 5.9% 90%;
     --ring: 255 85% 65%;
     --radius: 0.75rem;
+
+    --gradient-from: 255 85% 65%;
+    --gradient-via: 270 91.2% 65.1%;
+    --gradient-to: 199 89% 48%;
+    --blob-1: 255 85% 65%;
+    --blob-2: 270 91.2% 65.1%;
+    --blob-3: 199 89% 48%;
+    --primary-glow: 0 0 15px rgba(124, 58, 237, 0.8);
   }
 
   .dark {
@@ -48,6 +56,46 @@
     --border: 240 30% 12%;
     --input: 240 30% 12%;
     --ring: 255 85% 65%;
+
+    --gradient-from: 255 85% 65%;
+    --gradient-via: 270 91.2% 65.1%;
+    --gradient-to: 199 89% 48%;
+    --blob-1: 255 85% 65%;
+    --blob-2: 270 91.2% 65.1%;
+    --blob-3: 199 89% 48%;
+    --primary-glow: 0 0 15px rgba(124, 58, 237, 0.8);
+  }
+
+  .alien {
+    --background: 160 60% 2.5%;
+    --foreground: 120 100% 85%;
+    --card: 160 50% 4.5%;
+    --card-foreground: 120 100% 85%;
+    --popover: 160 50% 4.5%;
+    --popover-foreground: 120 100% 85%;
+    --primary: 135 100% 50%;
+    --primary-foreground: 160 60% 2%;
+    --secondary: 275 80% 12%;
+    --secondary-foreground: 120 100% 90%;
+    --muted: 275 40% 8%;
+    --muted-foreground: 120 40% 65%;
+    --accent: 275 70% 15%;
+    --accent-foreground: 120 100% 90%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 140 50% 12%;
+    --input: 140 50% 12%;
+    --ring: 135 100% 50%;
+    
+    --gradient-from: 135 100% 50%;
+    --gradient-via: 175 100% 50%;
+    --gradient-to: 280 100% 65%;
+    
+    --blob-1: 135 100% 50%;
+    --blob-2: 280 100% 50%;
+    --blob-3: 175 100% 50%;
+
+    --primary-glow: 0 0 15px rgba(34, 197, 94, 0.9);
   }
 
   * {
@@ -55,6 +103,66 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+    isolation: isolate;
+  }
+  
+  .alien {
+    font-family: 'Share Tech Mono', monospace;
+    text-shadow: 0 0 2px rgba(34, 197, 94, 0.25);
+  }
+  
+  .alien h1, .alien h2, .alien h3, .alien h4, .alien h5, .alien h6 {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 6px rgba(34, 197, 94, 0.6), 0 0 15px rgba(34, 197, 94, 0.3);
+  }
+
+  @keyframes crt-flicker {
+    0% { opacity: 0.994; }
+    50% { opacity: 1; }
+    100% { opacity: 0.996; }
+  }
+
+  .alien body {
+    animation: crt-flicker 0.15s infinite;
+  }
+
+  .alien body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.06) 0%, transparent 65%),
+      linear-gradient(to right, rgba(34, 197, 94, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(34, 197, 94, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    opacity: 0.8;
+  }
+
+  /* CRT Scanlines Overlay */
+  .alien body::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 4px;
+    z-index: 99999;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  .alien .glass-card:hover {
+    border-color: rgba(34, 197, 94, 0.35) !important;
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.22) !important;
   }
   
   ::selection {
@@ -71,6 +179,32 @@
     @apply bg-card/40 backdrop-blur-md border border-white/5 shadow-xl hover:bg-card/60 transition-all duration-300;
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-400 to-blue-500;
+    background-image: linear-gradient(
+      to right,
+      hsl(var(--gradient-from)),
+      hsl(var(--gradient-via)),
+      hsl(var(--gradient-to))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+  .retro-grid-lines {
+    background-image: 
+      linear-gradient(to right, rgba(34, 197, 94, 0.12) 1px, transparent 1px),
+      linear-gradient(to top, rgba(34, 197, 94, 0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(250px) rotateX(70deg);
+    transform-origin: top;
+    animation: grid-scroll 3s linear infinite;
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 10%, transparent 95%);
+  }
+}
+
+@keyframes grid-scroll {
+  from { background-position-y: 0; }
+  to { background-position-y: 40px; }
 }
