@@ -3,6 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from "react"
 const ThemeProviderContext = createContext({
   theme: "system",
   setTheme: () => null,
+  soundMuted: true,
+  setSoundMuted: () => null,
+  ufoTriggered: false,
+  triggerUfo: () => null,
 })
 
 export function ThemeProvider({
@@ -14,6 +18,12 @@ export function ThemeProvider({
   const [theme, setTheme] = useState(
     () => localStorage.getItem(storageKey) || defaultTheme
   )
+
+  const [soundMuted, setSoundMuted] = useState(
+    () => localStorage.getItem("vite-ui-sound-muted") !== "false"
+  )
+
+  const [ufoTriggered, setUfoTriggered] = useState(false)
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -42,6 +52,15 @@ export function ThemeProvider({
     setTheme: (theme) => {
       localStorage.setItem(storageKey, theme)
       setTheme(theme)
+    },
+    soundMuted,
+    setSoundMuted: (muted) => {
+      localStorage.setItem("vite-ui-sound-muted", String(muted))
+      setSoundMuted(muted)
+    },
+    ufoTriggered,
+    triggerUfo: (triggered) => {
+      setUfoTriggered(triggered)
     },
   }
 

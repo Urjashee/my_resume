@@ -4,7 +4,7 @@ import { Download } from "lucide-react"
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[520px] sm:min-h-[85vh] flex items-center justify-center overflow-hidden pt-20">
       {/* Animated Background Blobs */}
       <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ backgroundColor: 'hsl(var(--blob-1) / 0.3)' }}></div>
       <div className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style={{ backgroundColor: 'hsl(var(--blob-2) / 0.3)', animationDelay: '2s' }}></div>

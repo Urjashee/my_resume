@@ -1,9 +1,13 @@
 import { Link, useLocation } from "react-router-dom"
 import { ModeToggle } from "./ModeToggle"
+import { Volume2, VolumeX } from "lucide-react"
+import { useTheme } from "./ThemeProvider"
+import { playClick } from "../lib/sounds"
 
 export function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const { theme, soundMuted, setSoundMuted } = useTheme()
 
   return (
     <div className="fixed top-0 inset-x-0 z-50 flex justify-center mt-4 px-4 pointer-events-none">
@@ -27,7 +31,20 @@ export function Navbar() {
           <Link className="transition-colors hover:text-primary text-foreground/80" to="/open-source">Open Source</Link>
         </div>
 
-        <div className="flex flex-1 items-center justify-end">
+        <div className="flex flex-1 items-center justify-end gap-1.5 sm:gap-2">
+          {theme === "alien" && (
+            <button
+              onClick={() => {
+                const nextMuted = !soundMuted
+                setSoundMuted(nextMuted)
+                playClick(nextMuted)
+              }}
+              className="p-1.5 sm:p-2 rounded-full hover:text-primary text-muted-foreground hover:bg-white/5 transition-all pointer-events-auto"
+              title={soundMuted ? "Unmute Audio" : "Mute Audio"}
+            >
+              {soundMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 animate-pulse text-primary" />}
+            </button>
+          )}
           <ModeToggle />
         </div>
       </nav>
