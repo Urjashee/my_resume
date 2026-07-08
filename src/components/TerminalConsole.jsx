@@ -15,7 +15,7 @@ const COMMANDS = {
   secret    - Access classified deep-space intelligence
   clear     - Purge terminal display logs`,
 
-  about: `URJASHEE SHAW - Senior AI & Full Stack Engineer | Tech Lead
+  about: `URJASHEE SHAW - Senior Full Stack & AI Engineer | Tech Lead
   12+ years of experience architecting intelligent backend microservices, Agentic AI systems (MCP, LangGraph), and cloud-native applications.
   Specialist in Python, React, Node.js, and scalable cloud structures.`,
 

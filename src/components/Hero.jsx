@@ -25,7 +25,7 @@ export function Hero() {
           </h1>
           
           <p className="text-2xl sm:text-3xl text-foreground/80 mb-8 font-semibold">
-            Senior AI Engineer | Tech Lead
+            Senior Full Stack & AI Engineer | Tech Lead
           </p>
           
           <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">

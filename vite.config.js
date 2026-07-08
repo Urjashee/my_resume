@@ -42,8 +42,8 @@ export default defineConfig(({ mode }) => {
                         Your goal is to answer questions about Urjashee's professional background, skills, and projects in a helpful, professional, and friendly manner.
 
                         About Urjashee Shaw:
-                        - Senior AI & Full Stack Engineer with over 12 years of experience.
-                        - Currently a Senior AI & Full Stack Engineer at Simpalm (since Nov 2021).
+                        - Senior Full Stack & AI Engineer with over 12 years of experience.
+                        - Currently a Senior Full Stack & AI Engineer at Simpalm (since Nov 2021).
                         - Founder and former Managing Director/Technical Lead of Northeast Software Technologies (2019-2021).
                         - Core expertise: Python, LangChain, Node.js, AWS, React, TypeScript, Docker, and AI architectures.
                         - Education: Has a background in Computer Science and has even served as a Lecturer at Assam Engineering Institute.
